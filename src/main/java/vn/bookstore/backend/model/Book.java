@@ -11,18 +11,18 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
-    private int bookId;
+    private int id;
 
-    @Column(name = "name", length = 256)
+    @Column(name = "name" , columnDefinition = "nvarchar(255)")
     private String name;
 
-    @Column(name = "author", length = 512)
+    @Column(name = "author", columnDefinition = "nvarchar(512)")
     private String author;
 
     @Column(name = "isbn")
     private String ISBN;
 
-    @Column(name = "description", columnDefinition = "text")
+    @Column(name = "description", columnDefinition = "nvarchar(512)")
     private String description;
 
     @Column(name = "original_price")

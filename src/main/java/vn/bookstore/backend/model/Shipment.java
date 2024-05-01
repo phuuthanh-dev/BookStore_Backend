@@ -12,12 +12,12 @@ public class Shipment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="shipment_id")
-    private int shipmentId;
+    private int id;
 
-    @Column(name ="name")
+    @Column(name ="name", columnDefinition = "nvarchar(255)")
     private String name;
 
-    @Column(name ="description")
+    @Column(name ="description", columnDefinition = "nvarchar(255)")
     private String description;
 
     @Column(name ="shipping_price")

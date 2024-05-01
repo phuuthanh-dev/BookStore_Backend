@@ -12,12 +12,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userId;
+    private int id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", columnDefinition = "nvarchar(255)")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", columnDefinition = "nvarchar(255)")
     private String lastName;
 
     @Column(name = "username")
@@ -35,10 +35,10 @@ public class User {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "purchase_address")
+    @Column(name = "purchase_address", columnDefinition = "nvarchar(255)")
     private String purchaseAddress;
 
-    @Column(name = "delivery_address")
+    @Column(name = "delivery_address", columnDefinition = "nvarchar(255)")
     private String deliveryAddress;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {

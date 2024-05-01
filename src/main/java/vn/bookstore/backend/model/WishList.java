@@ -10,7 +10,7 @@ public class WishList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "wishlist_id")
-    private int wishlistId;
+    private int id;
 
     @ManyToOne(cascade = {
             CascadeType.PERSIST, CascadeType.DETACH,

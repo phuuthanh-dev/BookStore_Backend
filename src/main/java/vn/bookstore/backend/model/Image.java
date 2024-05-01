@@ -10,9 +10,9 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "image_id")
-    private int imageId;
+    private int id;
 
-    @Column(name = "name", length = 256)
+    @Column(name = "name", columnDefinition = "nvarchar(255)")
     private String name;
 
     @Column(name = "icon")
@@ -21,7 +21,7 @@ public class Image {
     @Column(name = "link")
     private String link;
 
-    @Column(name = "data")
+    @Column(name = "data", columnDefinition = "nvarchar(255)")
     @Lob
     private String data;
 

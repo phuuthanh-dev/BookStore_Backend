@@ -12,12 +12,12 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="payment_id")
-    private int paymentId;
+    private int id;
 
-    @Column(name ="name")
+    @Column(name ="name", columnDefinition = "nvarchar(255)")
     private String name;
 
-    @Column(name ="description", columnDefinition = "text")
+    @Column(name ="description", columnDefinition = "nvarchar(255)")
     private String description;
 
     @Column(name ="payment_price")

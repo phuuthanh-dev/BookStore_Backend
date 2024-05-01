@@ -12,9 +12,9 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
-    private int categoryId;
+    private int id;
 
-    @Column(name = "name", length = 256)
+    @Column(name = "name", columnDefinition = "nvarchar(255)")
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {

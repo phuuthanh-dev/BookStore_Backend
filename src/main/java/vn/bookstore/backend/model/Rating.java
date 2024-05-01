@@ -10,12 +10,12 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rating_id")
-    private long ratingId;
+    private long id;
 
     @Column(name = "rating_score")
     private float ratingScore;
 
-    @Column(name = "comment")
+    @Column(name = "comment", columnDefinition = "nvarchar(255)")
     private String comment;
 
     @ManyToOne(cascade = {
