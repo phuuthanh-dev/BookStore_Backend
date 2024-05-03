@@ -22,7 +22,7 @@ public class Book {
     @Column(name = "isbn")
     private String ISBN;
 
-    @Column(name = "description", columnDefinition = "nvarchar(512)")
+    @Column(name = "description", columnDefinition = "nvarchar(MAX)")
     private String description;
 
     @Column(name = "original_price")
