@@ -8,8 +8,6 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import vn.bookstore.backend.model.Book;
-import vn.bookstore.backend.model.Category;
 
 @Configuration
 public class MethodRestConfig implements RepositoryRestConfigurer {
@@ -17,6 +15,7 @@ public class MethodRestConfig implements RepositoryRestConfigurer {
 
     @Autowired
     private EntityManager entityManager;
+
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
         // allow id in json response

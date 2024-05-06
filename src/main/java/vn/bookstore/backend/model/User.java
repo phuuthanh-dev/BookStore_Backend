@@ -41,6 +41,12 @@ public class User {
     @Column(name = "delivery_address", columnDefinition = "nvarchar(255)")
     private String deliveryAddress;
 
+    @Column(name = "is_activated")
+    private boolean isActivated;
+
+    @Column(name = "activation_code")
+    private String activationCode;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.DETACH,
             CascadeType.MERGE, CascadeType.REFRESH
