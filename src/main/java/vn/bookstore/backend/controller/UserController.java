@@ -8,14 +8,20 @@ import vn.bookstore.backend.model.User;
 import vn.bookstore.backend.service.UserService;
 
 @RestController
-@RequestMapping(name = "/api/user")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(name = "/register")
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Validated  @RequestBody User user) {
         ResponseEntity<?> response = userService.registerUser(user);
         return response;
+    }
+
+    @GetMapping("/hello")
+    public String registerUser() {
+        return "hello";
     }
 }

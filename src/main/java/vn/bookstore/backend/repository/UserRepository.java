@@ -6,6 +6,7 @@ import vn.bookstore.backend.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    boolean existsByUsername(String username);
-    boolean existsByEmail(String email);
+    public boolean existsByUsername(String username);
+    public boolean existsByEmail(String email);
+    public User findByUsername(String username);
 }
