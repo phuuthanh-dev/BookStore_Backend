@@ -2,6 +2,7 @@ package vn.bookstore.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -84,7 +85,7 @@ public class UserService implements UserDetailsService {
 
     private void sendEmailActivationCode(String email, String activationCode) {
         String subject = "Activate your account at BookStore";
-//        String body = "Please use the following code to activate your account <"+email+">:</br><h1>" +activationCode+ "</h1>";
+        String url = "http://localhost:3000/user/active/"+ email +"/"+activationCode;
         String body = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -121,6 +122,9 @@ public class UserService implements UserDetailsService {
                 "            font-weight: bold;\n" +
                 "            text-align: center;\n" +
                 "        }\n" +
+                "        .mt-20 {\n" +
+                "            margin-top: 20px;\n" +
+                "        }\n" +
                 "    </style>\n" +
                 "</head>\n" +
                 "<body>\n" +
@@ -128,9 +132,33 @@ public class UserService implements UserDetailsService {
                 "        <h1>" + subject + "</h1>\n" +
                 "        <p>Please use the following code to activate your account:</p>\n" +
                 "        <div class=\"activation-code\">" + activationCode + "</div>\n" +
+                "        <div>To complete your registration, click the link below:</div>" +
+                "        <a href="+ url + ">Confirm your account</a>\n" +
+                "        <div class=\"mt-20\">Yours truly,</div>" +
+                "        <div>Book Store Team</br></div>" +
                 "    </div>\n" +
                 "</body>\n" +
                 "</html>";
         emailService.sendEmail(emailUsername, email, subject, body);
+    }
+
+    public ResponseEntity<?> activeAccount(String email, String activationCode) {
+        User user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            return ResponseEntity.badRequest().body(new Notification("User not found!"));
+        }
+
+        if (user.isActivated()) {
+            return ResponseEntity.badRequest().body(new Notification("Account is already activated!"));
+        }
+
+        if (user.getActivationCode().equals(activationCode)) {
+            user.setActivated(true);
+            User user1 = userRepository.save(user);
+            return ResponseEntity.status(HttpStatus.OK).body(new Notification("Account activated successfully!"));
+        } else {
+            return ResponseEntity.badRequest().body(new Notification("Account activation failed!"));
+        }
     }
 }
