@@ -13,8 +13,6 @@ import vn.bookstore.backend.payload.response.JwtResponse;
 import vn.bookstore.backend.security.jwt.JwtUtils;
 import vn.bookstore.backend.service.UserService;
 
-import javax.naming.AuthenticationException;
-
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/auth")
