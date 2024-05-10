@@ -1,5 +1,7 @@
 package vn.bookstore.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -37,6 +39,7 @@ public class Order {
     private double totalPrice;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<OrderItem> orderItems;
 
     @ManyToOne(cascade = {
@@ -44,6 +47,7 @@ public class Order {
             CascadeType.MERGE, CascadeType.REFRESH
     })
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     @ManyToOne(cascade = {
@@ -51,6 +55,7 @@ public class Order {
             CascadeType.MERGE, CascadeType.REFRESH
     })
     @JoinColumn(name = "payment_id")
+    @JsonBackReference
     private Payment payment;
 
     @ManyToOne(cascade = {
@@ -58,5 +63,6 @@ public class Order {
             CascadeType.MERGE, CascadeType.REFRESH
     })
     @JoinColumn(name = "shipment_id")
+    @JsonBackReference
     private Shipment shipment;
 }

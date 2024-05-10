@@ -1,5 +1,7 @@
 package vn.bookstore.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,6 +26,7 @@ public class OrderItem {
             CascadeType.MERGE, CascadeType.REFRESH
     })
     @JoinColumn(name = "book_id", nullable = false)
+    @JsonBackReference
     private Book book;
 
     @ManyToOne(cascade = {
@@ -31,5 +34,6 @@ public class OrderItem {
             CascadeType.MERGE, CascadeType.REFRESH
     })
     @JoinColumn(name = "order_id", nullable = false)
+    @JsonBackReference
     private Order order;
 }

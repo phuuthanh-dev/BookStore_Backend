@@ -28,6 +28,7 @@ public class UserService  {
     private String emailUsername;
 
     public ResponseEntity<?> registerUser(User user) {
+        System.out.println(user);
         if (userRepository.existsByUsername(user.getUsername())) {
             return ResponseEntity.badRequest().body(new Notification("This username is already in use!"));
         }

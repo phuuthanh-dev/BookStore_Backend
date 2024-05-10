@@ -1,7 +1,10 @@
 package vn.bookstore.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -47,16 +50,22 @@ public class User {
     @Column(name = "activation_code")
     private String activationCode;
 
+    @Column(name = "avatar", columnDefinition = "nvarchar(MAX)")
+    @Lob
+    private String avatar;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.DETACH,
             CascadeType.MERGE, CascadeType.REFRESH
     })
+    @JsonManagedReference
     private List<Rating> ratings;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.DETACH,
             CascadeType.MERGE, CascadeType.REFRESH
     })
+    @JsonManagedReference
     private List<WishList> wishlists;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
@@ -68,11 +77,14 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private List<Role> roles;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.DETACH,
             CascadeType.MERGE, CascadeType.REFRESH
     })
+    @JsonManagedReference
     private List<Order> orders;
 }

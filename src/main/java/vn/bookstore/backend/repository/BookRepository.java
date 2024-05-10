@@ -13,9 +13,9 @@ import vn.bookstore.backend.model.Book;
 public interface BookRepository extends JpaRepository<Book, Integer> {
     Page<Book> findByNameContaining(@RequestParam("name") String name, Pageable pageable);
 
-    @Query("SELECT b FROM Book b JOIN b.categories c WHERE c.id = :id")
+    @Query("SELECT b FROM Book b JOIN b.category c WHERE c.id = :id")
     Page<Book> findByCategoryList_CategoryId(@Param("id") int id, Pageable pageable);
 
-    @Query("SELECT b FROM Book b JOIN b.categories c WHERE c.id = :id AND b.name like %:name%")
+    @Query("SELECT b FROM Book b JOIN b.category c WHERE c.id = :id AND b.name like %:name%")
     Page<Book> findByNameAndCategoryList_CategoryId(@Param("id") int id, @Param("name") String name, Pageable pageable);
 }

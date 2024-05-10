@@ -1,5 +1,8 @@
 package vn.bookstore.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -29,6 +32,12 @@ public class Image {
             CascadeType.PERSIST, CascadeType.DETACH,
             CascadeType.MERGE, CascadeType.REFRESH
     })
-    @JoinColumn(name = "book_id", nullable = false)
+    @JoinColumn(name = "book_id")
+    @JsonBackReference
     private Book book;
+
+//    @ManyToOne
+//    @JoinColumn (name = "book_id")
+//    @JsonBackReference
+//    private Book book;
 }
