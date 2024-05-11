@@ -17,7 +17,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import vn.bookstore.backend.filter.AuthTokenFilter;
 import vn.bookstore.backend.security.Endpoints;
 import vn.bookstore.backend.service.UserDetailsServiceImpl;
-//import vn.bookstore.backend.service.UserDetailsServiceImpl;
 
 import java.util.Arrays;
 
@@ -29,7 +28,6 @@ public class SecurityConfiguration {
 
     @Autowired
     private AuthTokenFilter authTokenFilter;
-
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {

@@ -1,4 +1,4 @@
-package vn.bookstore.backend.service;
+package vn.bookstore.backend.service.email;
 
 public interface IEmailService {
 

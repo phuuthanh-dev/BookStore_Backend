@@ -55,7 +55,7 @@ public class Book {
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonManagedReference
+    @JsonIgnore
     List<Rating> ratings;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = {
@@ -64,13 +64,13 @@ public class Book {
     })
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonManagedReference
+    @JsonIgnore
     List<OrderItem> orderItems;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonManagedReference
+    @JsonIgnore
     List<WishList> wishLists;
 
 }

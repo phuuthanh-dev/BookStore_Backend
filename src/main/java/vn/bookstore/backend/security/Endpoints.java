@@ -8,18 +8,18 @@ public class Endpoints {
             , "/ratings", "/ratings/**"
             , "/users/search/existsByUsername"
             , "/users/search/existsByEmail"
-            , "/api/user/active"
+            , "/api/auth/active"
     };
 
     public static final String[] PUBLIC_POST_ENDPOINTS = {
-            "/api/auth/register", "/api/auth/login", "/api/book/add"
+            "/api/auth/register", "/api/auth/login", "/api/book"
     };
 
     public static final String[] ADMIN_GET_ENDPOINTS = {
-            "/users", "users/**", "/api/book/**", "/api/user/**"
+            "/users", "users/**", "/api/book", "/api/book/**", "/api/user/**"
     };
 
     public static final String[] ADMIN_POST_ENDPOINTS = {
-            "/books"
+            "/books", "/api/book", "/images", "/api/auth/register"
     };
 }

@@ -2,14 +2,15 @@ package vn.bookstore.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
+@Builder
 @Table(name = "`user`")
 public class User {
     @Id
