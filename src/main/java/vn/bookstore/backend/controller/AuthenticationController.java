@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import vn.bookstore.backend.dto.LoginResponse;
 import vn.bookstore.backend.dto.RegisterRequest;
 import vn.bookstore.backend.payload.request.LoginRequest;
 import vn.bookstore.backend.payload.response.JwtResponse;
@@ -44,7 +45,7 @@ public class AuthenticationController {
         // Xác thực k thành công
         if (authentication.isAuthenticated()) {
             final String jwt = jwtUtils.generateToken(loginRequest.getUsername());
-            return ResponseEntity.ok(new JwtResponse(jwt));
+            return ResponseEntity.ok(new LoginResponse(jwt));
         }
 
         return ResponseEntity.badRequest().body("Username or password is incorrect");

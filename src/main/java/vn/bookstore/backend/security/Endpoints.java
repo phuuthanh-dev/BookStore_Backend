@@ -8,7 +8,7 @@ public class Endpoints {
             , "/ratings", "/ratings/**"
             , "/users/search/existsByUsername"
             , "/users/search/existsByEmail"
-            , "/api/auth/active"
+            , "/api/auth/active", "api/v1/payment/vn-pay" , "api/v1/payment/vn-pay-callback"
     };
 
     public static final String[] PUBLIC_POST_ENDPOINTS = {
