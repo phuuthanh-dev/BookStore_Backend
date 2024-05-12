@@ -3,6 +3,8 @@ package vn.bookstore.backend.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import vn.bookstore.backend.enums.AccountState;
+import vn.bookstore.backend.enums.Gender;
 
 import java.util.List;
 
@@ -30,8 +32,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "gender")
-    private char gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Column(name = "email")
     private String email;
@@ -45,8 +47,8 @@ public class User {
     @Column(name = "delivery_address", columnDefinition = "nvarchar(255)")
     private String deliveryAddress;
 
-    @Column(name = "is_activated")
-    private boolean isActivated;
+    @Enumerated(EnumType.STRING)
+    private AccountState state;
 
     @Column(name = "activation_code")
     private String activationCode;

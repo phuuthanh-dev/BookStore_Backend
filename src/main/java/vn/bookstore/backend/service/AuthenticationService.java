@@ -8,6 +8,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import vn.bookstore.backend.dto.RegisterRequest;
+import vn.bookstore.backend.enums.AccountState;
+import vn.bookstore.backend.enums.Gender;
 import vn.bookstore.backend.exception.UserAlreadyExistsException;
 import vn.bookstore.backend.model.Notification;
 import vn.bookstore.backend.model.Role;
@@ -52,15 +54,23 @@ public class AuthenticationService {
 
         List<Role> roles = new ArrayList<>();
         roles.add(roleRepository.findByName("USER"));
+        Gender gender = null;
+        if (request.gender() == 1) {
+            gender = Gender.MALE;
+        } else if (request.gender() == 2) {
+            gender = Gender.FEMALE;
+        } else if (request.gender() == 3) {
+            gender = Gender.OTHER;
+        }
         var user = User.builder()
                 .firstName(request.firstName())
                 .email(request.email())
                 .password(bCryptPasswordEncoder.encode(request.password()))
                 .lastName(request.lastName())
-                .gender(request.gender())
+                .gender(gender)
                 .username(request.username())
                 .activationCode(generateActivationCode())
-                .isActivated(false)
+                .state(AccountState.INACTIVE)
                 .phone(request.phone())
                 .roles(roles)
                 .build();
@@ -92,12 +102,12 @@ public class AuthenticationService {
             return ResponseEntity.badRequest().body(new Notification("User not found!"));
         }
 
-        if (user.isActivated()) {
+        if (user.getState().equals(AccountState.ACTIVE)) {
             return ResponseEntity.badRequest().body(new Notification("Account is already activated!"));
         }
 
         if (user.getActivationCode().equals(activationCode)) {
-            user.setActivated(true);
+            user.setState(AccountState.ACTIVE);
             User user1 = userRepository.save(user);
             return ResponseEntity.status(HttpStatus.OK).body(new Notification("Account activated successfully!"));
         } else {

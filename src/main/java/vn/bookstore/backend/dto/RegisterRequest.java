@@ -10,6 +10,6 @@ public record RegisterRequest(
         String password,
         String phone,
         String email,
-        char gender
+        int gender
 ) {
 }
