@@ -1,21 +1,16 @@
 package vn.bookstore.backend.controller;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import vn.bookstore.backend.dto.BookCreateRequest;
 import vn.bookstore.backend.model.Book;
-import vn.bookstore.backend.service.BookService;
 import vn.bookstore.backend.service.IBookService;
 
 @RestController
@@ -45,6 +40,7 @@ public class BookController {
     public ResponseEntity<Book> saveBook(@RequestBody BookCreateRequest book) {
         return ResponseEntity.ok(bookService.saveBook(book));
     }
+
 //
 //    @DeleteMapping("/{id}")
 //    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {

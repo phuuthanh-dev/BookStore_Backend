@@ -18,4 +18,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     @Query("SELECT b FROM Book b JOIN b.category c WHERE c.id = :id AND b.name like %:name%")
     Page<Book> findByNameAndCategoryList_CategoryId(@Param("id") int id, @Param("name") String name, Pageable pageable);
+
+    Book findFirstByOrderByIdDesc();
 }
