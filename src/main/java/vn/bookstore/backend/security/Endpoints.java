@@ -8,7 +8,7 @@ public class Endpoints {
             , "/ratings", "/ratings/**"
             , "/users/search/existsByUsername"
             , "/users/search/existsByEmail"
-            , "/api/auth/active", "api/v1/payment/vn-pay" , "api/v1/payment/vn-pay-callback", "/ws/**"
+            , "/api/auth/active", "api/v1/payment/vn-pay" , "api/v1/payment/vn-pay-callback", "/ws", "/ws/**"
     };
 
     public static final String[] PUBLIC_POST_ENDPOINTS = {
@@ -21,5 +21,9 @@ public class Endpoints {
 
     public static final String[] ADMIN_POST_ENDPOINTS = {
             "/books", "/api/book", "/images", "/api/auth/register"
+    };
+
+    public static final String[] ADMIN_PUT_ENDPOINTS = {
+            "/api/book/**", "/api/book"
     };
 }

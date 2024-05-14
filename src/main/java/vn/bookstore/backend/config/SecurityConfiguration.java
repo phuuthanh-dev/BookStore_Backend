@@ -51,13 +51,20 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST,Endpoints.PUBLIC_POST_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.GET, Endpoints.ADMIN_GET_ENDPOINTS).hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.POST, Endpoints.ADMIN_POST_ENDPOINTS).hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, Endpoints.ADMIN_PUT_ENDPOINTS).hasAuthority("ADMIN")
         );
+
+        http.authorizeHttpRequests(configurer -> configurer
+                .requestMatchers("/ws/**").permitAll()
+        );
+
         http.cors(cors -> {
             cors.configurationSource(request -> {
                 CorsConfiguration corsConfiguration = new CorsConfiguration();
                 corsConfiguration.addAllowedOrigin(Endpoints.front_end_host);
                 corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
                 corsConfiguration.addAllowedHeader("*");
+                corsConfiguration.setAllowCredentials(true);
                 return corsConfiguration;
             });
         });

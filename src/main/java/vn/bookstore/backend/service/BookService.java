@@ -1,20 +1,17 @@
 package vn.bookstore.backend.service;
 
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import vn.bookstore.backend.dto.BookCreateRequest;
+import vn.bookstore.backend.dto.UpdateBookResponse;
 import vn.bookstore.backend.model.Book;
 import vn.bookstore.backend.model.Image;
 import vn.bookstore.backend.repository.BookRepository;
 import vn.bookstore.backend.repository.ImageRepository;
-
-import java.util.List;
 
 @Transactional
 @Service
@@ -55,6 +52,24 @@ public class BookService implements IBookService {
 
         imageRepository.save(image);
         return bookRepository.save(book1);
+    }
+
+    @Override
+    public UpdateBookResponse updateBook(UpdateBookResponse book) {
+        // Fetch the existing book from the database
+        Book existingBook = bookRepository.findById(book.id()).get();
+
+        existingBook.setPrice(book.price());
+        existingBook.setDescription(book.description());
+        existingBook.setName(book.name());
+        existingBook.setAuthor(book.author());
+        existingBook.setQuantity(book.quantity());
+        existingBook.setISBN(book.isbn());
+        existingBook.setAvgRatings(book.avgRatings());
+
+        bookRepository.save(existingBook);
+        return book;
+        // Save the updated book entity back to the database
     }
 
 

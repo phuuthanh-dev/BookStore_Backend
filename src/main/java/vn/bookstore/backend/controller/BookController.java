@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import vn.bookstore.backend.dto.BookCreateRequest;
+import vn.bookstore.backend.dto.UpdateBookResponse;
 import vn.bookstore.backend.model.Book;
+import vn.bookstore.backend.model.Notification;
 import vn.bookstore.backend.service.IBookService;
 
 @RestController
@@ -37,21 +39,21 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> saveBook(@RequestBody BookCreateRequest book) {
-        return ResponseEntity.ok(bookService.saveBook(book));
+    public ResponseEntity<?> saveBook(@RequestBody BookCreateRequest book) {
+//        bookService.saveBook(book);
+        return ResponseEntity.ok(new Notification("hello"));
     }
 
-//
+    //
 //    @DeleteMapping("/{id}")
 //    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
 //        bookService.deleteBook(id);
 //        return ResponseEntity.noContent().build();
 //    }
-//
-//    @PutMapping()
-//    public ResponseEntity<Book> updateBook(@RequestBody Book book) {
-//        return ResponseEntity.ok(bookService.updateBook(book));
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateBookResponse> updateBook(@PathVariable int id, @RequestBody UpdateBookResponse book) {
+        return ResponseEntity.ok(bookService.updateBook(book));
+    }
 //
 //    @GetMapping("/sorted-and-paged/by-categories")
 //    public ResponseEntity<Page<Book>> getBooksByCategoriesAndPriceBetween(
